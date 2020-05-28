@@ -1,9 +1,41 @@
 <template>
-  <div id="app">
-    <div class="container">
-      <Events />
-    </div>
-  </div>
+  <v-app id="inspire">
+    <v-navigation-drawer v-model="drawer" app clipped>
+      <v-list dense>
+        <v-list-item link>
+          <v-list-item-action>
+            <v-icon>mdi-view-dashboard</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Dashboard</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item link>
+          <v-list-item-action>
+            <v-icon>mdi-settings</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Settings</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-app-bar app clipped-left>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-toolbar-title>Application</v-toolbar-title>
+    </v-app-bar>
+
+    <v-content>
+      <v-container class="fill-height" fluid>
+        <Events />
+      </v-container>
+    </v-content>
+
+    <v-footer app>
+      <span>&copy; 2020</span>
+    </v-footer>
+  </v-app>
 </template>
 
 <script>
@@ -11,22 +43,20 @@ import Events from "./components/Events";
 
 export default {
   name: "App",
+
   components: {
     Events
+  },
+  props: {
+    source: String
+  },
+
+  data: () => ({
+    drawer: null
+  }),
+
+  created() {
+    this.$vuetify.theme.dark = true;
   }
 };
 </script>
-
-<style>
-body {
-  font-family: "Arial Narrow", Arial, sans-serif;
-  line-height: 1.6;
-  background: #e8f7f0;
-}
-.container {
-  max-width: 1100px;
-  margin: auto;
-  overflow: auto;
-  padding: 0 2rem;
-}
-</style>
