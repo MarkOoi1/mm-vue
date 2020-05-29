@@ -11,7 +11,7 @@ const getters = {
 const actions = {
   async fetchEvents({ commit }) {
     const response = await axios.get(
-      "http://localhost:8000/api/events?page=1",
+      "http://" + location.host.split(":", 1) + ":8000/api/events?page=1",
       { headers: { accept: "application/json" } }
     );
 
